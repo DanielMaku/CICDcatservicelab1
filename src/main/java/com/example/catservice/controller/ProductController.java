@@ -2,6 +2,7 @@ package com.example.catservice.controller;
 
 import com.example.catservice.model.Product;
 import com.example.catservice.service.ProductService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +21,13 @@ public class ProductController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Product createProduct(@RequestBody  Product product){
         return productService.create(product);
+    }
+
+    @GetMapping("/{id}")
+    public Product getById(@PathVariable long id){
+        return productService.getById(id);
     }
 }
