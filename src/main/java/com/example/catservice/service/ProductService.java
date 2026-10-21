@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,5 +33,8 @@ public class ProductService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product with id"+ id +"Product not found"));
 
     }
-
+public List<Product> getByMinimumPrice(BigDecimal minPrice)
+{
+    return productRepository.findByMinPrice(minPrice);
+}
 }
