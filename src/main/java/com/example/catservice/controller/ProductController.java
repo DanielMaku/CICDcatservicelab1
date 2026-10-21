@@ -1,5 +1,6 @@
 package com.example.catservice.controller;
 
+import com.example.catservice.dto.CreateProductRequest;
 import com.example.catservice.model.Product;
 import com.example.catservice.repository.ProductRepository;
 import com.example.catservice.service.ProductService;
@@ -26,8 +27,8 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Product createProduct(@RequestBody  Product product){
-        return productService.create(product);
+    public Product createProduct(@RequestBody CreateProductRequest request) {
+        return productService.createProduct(request);
     }
 
     @GetMapping("/{id}")
@@ -40,6 +41,12 @@ public class ProductController {
             @RequestParam("price") BigDecimal price)
     {
         return productService.getByMinimumPrice(price);
+    }
+
+    @GetMapping("/by-category")
+    public List<Product> getByCategory(
+            @RequestParam("name") String categoryName) {
+        return productService.getByCategoryName(categoryName);
     }
 
 }
